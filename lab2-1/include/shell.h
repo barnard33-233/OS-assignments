@@ -11,11 +11,15 @@
 #define CMD_SIZE 1024
 #define ARGS_MAX 128
 
-char cmd[CMD_SIZE];
-char * argv[ARGS_MAX];
-int argc;
+extern char cmd[CMD_SIZE];
+extern char * argv[ARGS_MAX];
+extern int argc;
 
 int PrintPrompt(void);
 int GetCmd(void);
+
+//TODO
+int AnalyzeCmd(void);
+int CreateProcess(void);
 
 #endif

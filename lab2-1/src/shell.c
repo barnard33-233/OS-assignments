@@ -1,4 +1,10 @@
 #include "shell.h"
+#include "history.h"
+#include "sh-builtins.h"
+
+char cmd[CMD_SIZE];
+char * argv[ARGS_MAX];
+int argc;
 
 int main(){
     while(1){

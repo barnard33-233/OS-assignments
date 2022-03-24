@@ -1,1 +1,3 @@
 *.o
+*/.vscode
+./lab2-1/mysh

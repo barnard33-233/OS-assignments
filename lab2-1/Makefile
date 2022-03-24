@@ -1,15 +1,20 @@
-objects = shell.o
+# Makefile of Mysh
 src_dir = ./src
-include_dir = ./include
-cflags = -I $(include_dir) -c
+inc_dir = ./include
 
-mysh:$(objects)
-	gcc $(objects) -o mysh
+# VPATH = $(src_dir) $(inc_dir)
 
-shell.o:$(src_dir)/shell.c $(include_dir)/shell.h
-	gcc $(cflags) $(src_dir)/shell.c -o shell.o
+SOURCE = $(foreach dir, $(src_dir), $(wildcard $(dir)/*.c))
 
+INCLUDE = $(foreach dir, $(src_dir), $(wildcard $(dir)/*.h))
+
+cflags = -I $(inc_dir) -Wall -o
+
+mysh:$(SOURCE) $(INCLUDE)
+	gcc $(SOURCE) $(cflags) mysh
+
+# test option to finish
 
 .PHONY: clean
 clean:
-	-rm ./*.o mysh
+	-rm ./mysh
