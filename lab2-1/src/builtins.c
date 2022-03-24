@@ -3,21 +3,33 @@
 #include "history.h"
 
 int builtin_dirs(){
+    if (argc != 1){
+        return -1;
+    }
     char * cwd = NULL;
     cwd = getcwd(NULL, 0);
-    printf("%s\n", cwd);
-    return 0;
+    if (cwd){
+        printf("%s\n", cwd);
+        return 0;
+    }
+    return -1;
 }
 
 int builtin_cd(){
-    return chdir(argv[1]);
+    if(argc == 2){
+        return chdir(argv[1]);
+    }
+    return -1;
 }
 
 int builtin_history(){
-    if(argc > 1){
+    if(argc > 2){
+        return -1;
+    }
+    else if(argc == 2){
         char * p;
         int his_id = (int)strtol(argv[1], &p, 10); //his_id should be a natural number
-        if(his_id <= 0 | his_id > HISTORY_SIZE){
+        if((his_id <= 0) || (his_id > HISTORY_SIZE)){
             printf("No such command in history");
             return -1;
         }

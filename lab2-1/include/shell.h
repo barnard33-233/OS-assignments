@@ -15,11 +15,11 @@ extern char cmd[CMD_SIZE];
 extern char * argv[ARGS_MAX];
 extern int argc;
 
-int PrintPrompt(void);
-int GetCmd(void);
+int PrintPrompt(void);// print a prompt
+int GetCmd(void);// read a line from stdin and save it to `cmd`
 
 //TODO
-int AnalyzeCmd(void);
-int CreateProcess(void);
+// int AnalyzeCmd(void);
+// int CreateProcess(void);
 
 #endif

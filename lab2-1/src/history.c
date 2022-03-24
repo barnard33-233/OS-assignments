@@ -1,7 +1,7 @@
 #include "history.h"
 #include "shell.h"
 
-char * history[HISTORY_SIZE];
+char * history[HISTORY_SIZE]; //remember to free this before exit
 int his_top;
 
 int InitHistory(){
@@ -20,7 +20,7 @@ char* GetHistory(int num){
     
     char * his_cmd;
     size_t size = strlen(history[pos]) + 1;
-    if(his_cmd = malloc(size * sizeof(char))){
+    if((his_cmd = malloc(size * sizeof(char)))){
         perror("Error");
         return NULL;
     }
