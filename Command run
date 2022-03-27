@@ -1,0 +1,31 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<unistd.h>
+#define MAX_LINE 80
+int forkk(const char* command, char* argv[])
+{
+    int *pid = NULL;    //申请内存 
+    pid = (int*)malloc(sizeof(int) * 1000);
+    pid=fork();
+    if(pid>0)   //子进程中运行exevp 
+	   execvp(command,argv);
+    free(pid);	  //释放内存 
+}
+int main(void)
+{
+	char *args[MAX_LINE/2+1];
+	//args[0]="ps";
+	//args[1]="-ael";
+	//args[2]=NULL;
+	//取消上面三行数据可以检验下面的代码 
+	int should_run = 1;
+	  while(should_run)
+	  {
+	  	  printf("osh>");
+		  fflush(stdout);  
+		  //从此往上皆为给定的框架 
+		  //此处为接受指令并分割指令的函数   
+        forkk(args[0],args);   //代码运行函数 
+	  }
+}
+
