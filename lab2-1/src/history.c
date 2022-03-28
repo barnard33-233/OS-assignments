@@ -44,3 +44,11 @@ int SaveHistory(){
     his_top ++;
     return 0;
 }
+
+void ExitHistory(){
+    for(int i = 0; i < HISTORY_SIZE; i++){
+        if(!history[i]){
+            free(history[i]);
+        }
+    }
+}

@@ -2,6 +2,22 @@
 #include "shell.h"
 #include "history.h"
 
+int (*builtin_func[])(void) = {
+    builtin_exit,
+    builtin_cd,
+    builtin_dirs,
+    builtin_history
+};
+
+char *builtin_name[] = {
+    "exit",
+    "cd",
+    "dirs",
+    "history"
+};
+
+const int builtin_cnt = 4;
+
 int builtin_dirs(){
     if (argc != 1){
         return -1;
@@ -56,4 +72,9 @@ int builtin_history(){
         cnt --;
     }
     return 0;
+}
+
+int builtin_exit(){
+    ExitHistory();
+    exit(0);
 }

@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <sys/wait.h>
+#include <sys/types.h>
 
 #define PROMPT_SIZE 1024
 #define CMD_SIZE 1024
@@ -20,6 +22,6 @@ int GetCmd(void);// read a line from stdin and save it to `cmd`
 
 //TODO
 // int AnalyzeCmd(void);
-// int CreateProcess(void);
+int Command(void);
 
 #endif
