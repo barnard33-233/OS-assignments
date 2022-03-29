@@ -1,12 +1,21 @@
 #include "shell.h"
 #include "history.h"
 #include "sh-builtins.h"
+// #include "test1-0.c"
+
+#ifdef DEBUG
+extern int testmain(void);
+#endif
 
 char cmd[CMD_SIZE];
 char * argv[ARGS_MAX];
 int argc;
 
 int main(){
+    #ifdef DEBUG
+    testmain();
+    return 0;
+    #endif
     InitHistory();
     while(1){
         if(PrintPrompt()){
@@ -17,7 +26,7 @@ int main(){
             perror("Error");
             continue;
         }
-        fprintf(stderr, "%s", cmd);//for test and debug
+        fprintf(stderr, "%s\n", cmd);//for test and debug
 
         //解析命令
         

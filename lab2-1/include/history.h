@@ -22,4 +22,7 @@ int SaveHistory(void);//save cmd to history
 char* GetHistory(int num);// get a history id==num
 void ExitHistory(void);
 
+//debug
+int InfoHistory(void);
+
 #endif

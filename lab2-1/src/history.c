@@ -20,7 +20,7 @@ char* GetHistory(int num){
     
     char * his_cmd;
     size_t size = strlen(history[pos]) + 1;
-    if((his_cmd = malloc(size * sizeof(char)))){
+    if(!(his_cmd = malloc(size * sizeof(char)))){
         perror("Error");
         return NULL;
     }
@@ -41,7 +41,7 @@ int SaveHistory(){
         free(history[his_top]);
     }
     history[his_top] = new_cmd;
-    his_top ++;
+    his_top = (his_top + 1) % HISTORY_SIZE;
     return 0;
 }
 
@@ -52,3 +52,29 @@ void ExitHistory(){
         }
     }
 }
+
+#ifdef DEBUG
+int InfoHistory(){
+    fprintf(stderr, "his_top: %d\n", his_top);
+    for(int i = 0; i < HISTORY_SIZE; i++){
+        if(history[i]){
+            fprintf(stderr, "%3d: %s", i, history[i]);
+        }
+        else{
+            fprintf(stderr, "%3d, NULL", i);
+        }
+        if(i == his_top){
+            fprintf(stderr, "\t<-\n");
+        }
+        else{
+            fprintf(stderr, "\n");
+        }
+    }
+    return 0;
+}
+#else
+int InfoHistory(){
+    fprintf(stderr, "Not define DEBUG\n");
+    return 0;
+}
+#endif
