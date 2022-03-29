@@ -20,5 +20,6 @@ extern int his_top;
 int InitHistory(void);// should be called before everything start
 int SaveHistory(void);//save cmd to history
 char* GetHistory(int num);// get a history id==num
+void ExitHistory(void);
 
 #endif
