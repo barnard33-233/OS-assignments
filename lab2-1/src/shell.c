@@ -1,12 +1,21 @@
 #include "shell.h"
 #include "history.h"
 #include "sh-builtins.h"
+// #include "test1-0.c"
+
+#ifdef DEBUG
+extern int testmain(void);
+#endif
 
 char cmd[CMD_SIZE];
 char * argv[ARGS_MAX];
 int argc;
 
 int main(){
+    #ifdef DEBUG
+    testmain();
+    return 0;
+    #endif
     InitHistory();
     while(1){
         if(PrintPrompt()){
@@ -17,11 +26,11 @@ int main(){
             perror("Error");
             continue;
         }
-        fprintf(stderr, "%s", cmd);//for test and debug
+        fprintf(stderr, "%s\n", cmd);//for test and debug
 
         //解析命令
         
-        int cmd_stat = Command();
+        //int cmd_stat = Command();
         //历史记录
 
         
@@ -81,6 +90,7 @@ pid_t Createp(){
         perror("Error");
         return 0;
     }
+    return 0;
 }
 
 int Command(){
@@ -89,7 +99,7 @@ int Command(){
     //traverse the transfer table and call builtin command func.
     for(int i = 0; i < builtin_cnt; i++){
         if(strcmp(name, builtin_name[i]) == 0){
-            int (*builtin)(void) = builtin_func;
+            int (*builtin)(void) = builtin_func[i];
             if(builtin()){
                 perror("Error");
                 return -1;
@@ -106,4 +116,5 @@ int Command(){
             return -1;
         }
     }
+    return 0;
 }

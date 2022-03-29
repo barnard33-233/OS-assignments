@@ -76,5 +76,6 @@ int builtin_history(){
 
 int builtin_exit(){
     ExitHistory();
+    printf("Bye :-)\n");
     exit(0);
 }
