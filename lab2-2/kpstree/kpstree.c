@@ -42,4 +42,4 @@ void cleanup_module(){
     printk("exit");
 }
 
-MODULE_LICENCE("GPL");
+MODULE_LICENSE("GPL");
