@@ -23,10 +23,10 @@ void traverse(struct task_struct * task){
     list_for_each(node, task->children){
         child = list_entry(node, struct task_struct, sibling);
         traverse(child);
-        long state = child.state;
-        char* name = child.comm;
-        pid_t pid = child.pid;
-        pid_t tgid = child.tgid;
+        long state = child->state;
+        char* name = child->comm;
+        pid_t pid = child->pid;
+        pid_t tgid = child->tgid;
         printk(
             "%ld\t\t%s\t\t%d\t\t%d\n",
             state,

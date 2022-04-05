@@ -20,10 +20,10 @@ int init_module(){
     struct task_struct * task;
     printk("state\t\tname\t\tpid\t\ttgid\n");
     for_each_process(task){
-        long state = task.state;
-        char* name = task.comm;
-        pid_t pid = task.pid;
-        pid_t tgid = task.tgid;
+        long state = task->state;
+        char* name = task->comm;
+        pid_t pid = task->pid;
+        pid_t tgid = task->tgid;
         printk(
             "%ld\t\t%s\t\t%d\t\t%d\n",
             state,
