@@ -18,7 +18,7 @@ extern char* history[HISTORY_SIZE];
 extern int his_top;
 
 int InitHistory(void);// should be called before everything start
-int SaveHistory(void);//save cmd to history
+int SaveHistory(char* std_cmd);//save cmd to history
 char* GetHistory(int num);// get a history id==num
 void ExitHistory(void);
 

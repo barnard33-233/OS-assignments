@@ -21,22 +21,22 @@ char* GetHistory(int num){
     char * his_cmd;
     size_t size = strlen(history[pos]) + 1;
     if(!(his_cmd = malloc(size * sizeof(char)))){
-        perror("Error");
+        perror("GetHistory malloc error");
         return NULL;
     }
     strcpy(his_cmd, history[pos]);
     return his_cmd;
 }
 
-int SaveHistory(){
+int SaveHistory(char* std_cmd){
     char * new_cmd;
-    size_t size = strlen(cmd) + 1;
+    size_t size = strlen(std_cmd) + 1;
     new_cmd = malloc(size * sizeof(char));
     if(!new_cmd){
-        perror("Error");
+        perror("SaveHistory malloc error");
         return -1;
     }
-    strcpy(new_cmd, cmd);
+    strcpy(new_cmd, std_cmd);
     if(!history[his_top]){
         free(history[his_top]);
     }
@@ -72,6 +72,7 @@ int InfoHistory(){
     }
     return 0;
 }
+
 #else
 int InfoHistory(){
     fprintf(stderr, "Not define DEBUG\n");

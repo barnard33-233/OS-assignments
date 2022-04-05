@@ -13,7 +13,7 @@ int testmain(){
         // argc = 2;
         // argv[0] = "ls";
         // argv[1] = "-al";
-        int ret = SaveHistory();
+        int ret = SaveHistory(cmd);
         fprintf(stderr, "SaveHistory return %d\n", ret);
         char* hiscmd = GetHistory(1);
         fprintf(stderr, "GetHistory hiscmd: %s\n", hiscmd);

@@ -11,7 +11,7 @@
 
 #define PROMPT_SIZE 1024
 #define CMD_SIZE 1024
-#define ARGS_MAX 128
+#define ARGS_MAX 1024
 
 extern char cmd[CMD_SIZE];
 extern char * argv[ARGS_MAX];
@@ -20,8 +20,17 @@ extern int argc;
 int PrintPrompt(void);// print a prompt
 int GetCmd(void);// read a line from stdin and save it to `cmd`
 
-//TODO
-// int AnalyzeCmd(void);
 int Command(void);
+int AnalyzeCmd(void);
+void FreeArgv(void);
+char* FormStdCmd(void);
+
+int Spliter(char*, char***, int*);
+int RecognizeHisSym(char* string);
+
+//for debug:
+
+void InfoArg(void);
+
 
 #endif
