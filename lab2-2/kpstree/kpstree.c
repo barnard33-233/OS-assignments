@@ -5,6 +5,7 @@
 #include <linux/unistd.h>
 #include <linux/kernel.h>
 #include <linux/list.h>
+#include <linux/init.h>
 
 int init_module(void);
 void cleanup_module(void);
