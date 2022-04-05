@@ -37,6 +37,8 @@ void traverse(struct task_struct * task){
     }
 }
 
-
+void cleanup_module(){
+    printk("exit");
+}
 
 MODULE_LICENCE("GPL");
