@@ -76,6 +76,7 @@ int builtin_history(){
 
 int builtin_exit(){
     ExitHistory();
+    FreeArgv();
     printf("Bye :-)\n");
     exit(0);
 }

@@ -142,30 +142,3 @@ void InfoArg(){
         fprintf(stderr, "%s\n", argv[i]);
     }
 }
-
-// int AnalyzeCmd(){
-//     int len = strlen(cmd);
-//     //split cmd by blank,count each argv[]'s length
-//     char *copy;//strtok function will distroy cmd's integrality,so use copy.
-//     copy=(char*)malloc(len);
-//     strcpy(copy,cmd);
-//     char *ptr;
-//     int ArgvMark=0;
-//     ptr=strtok(copy," ");
-//     while(ptr!=NULL){
-//         argv[ArgvMark]=(char*)malloc(sizeof(strlen(ptr)));
-//         strcpy(argv[ArgvMark],ptr);
-//  //       printf("%d: ",ArgvMark);
-//  //       printf("ptr=%s lenP=%ld ",ptr,strlen(ptr));
-//  //       printf("copy=%s\n",copy);
-//         ptr=strtok(NULL," ");
-//         ArgvMark++;
-//     }
-//     //eliminate the last few blanks
-//     if(strcmp(argv[ArgvMark-1]," ")==0){
-//         free(argv[ArgvMark-1]);
-//         ArgvMark--;
-//     }
-//     free(copy);
-//     return ArgvMark;
-// }
