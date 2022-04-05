@@ -2,6 +2,7 @@
 #include "history.h"
 #include "sh-builtins.h"
 // #include "test1-0.c"
+// #include "test2.c"
 
 #ifdef DEBUG
 extern int testmain(void);
@@ -16,6 +17,7 @@ int main(){
     testmain();
     return 0;
     #endif
+    
     InitHistory();
     while(1){
         if(PrintPrompt()){
@@ -26,14 +28,17 @@ int main(){
             perror("Error");
             continue;
         }
-        fprintf(stderr, "%s\n", cmd);//for test and debug
+        // fprintf(stderr, "%s\n", cmd);//for test and debug
 
-        
-        
-        //int cmd_stat = Command();
-        //历史记录
+        AnalyzeCmd();
 
-        
+        if(!Command()){
+            char* std_cmd = FormStdCmd();
+            SaveHistory(std_cmd);
+            free(std_cmd);
+        }
+
+        FreeArgv();
     }
     return 0;
 }

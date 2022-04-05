@@ -25,6 +25,8 @@ int AnalyzeCmd(void);
 void FreeArgv(void);
 char* FormStdCmd(void);
 
+int Spliter(char*, char***, int*);
+int RecognizeHisSym(char* string);
 
 //for debug:
 

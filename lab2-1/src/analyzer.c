@@ -1,9 +1,8 @@
 #include "shell.h"
 #include "history.h"
 
-int Spliter(char*, char**, int*);
-
 int RecognizeHisSym(char*);//识别历史记录算符，若是则返回查询的条目id,否则返回-1
+
 
 int GetCmd(){
     // memset(NULL, cmd, CMD_SIZE);
@@ -21,41 +20,45 @@ int GetCmd(){
 
 void FreeArgv(){
     for(int i=0;i<argc;i++){
-        fprintf(stderr, "\nagrv[%d]=%s length=%ld", i, argv[i],strlen(argv[i]));
+        // fprintf(stderr, "\nagrv[%d]=%s length=%ld", i, argv[i],strlen(argv[i]));
         free(argv[i]);
     }
 }
 
-int Spliter(char* string, char** tmp_argv, int * tmp_argc){
-    char* string_copy = malloc(sizeof(char) * strlen(string));
-    tmp_argv = malloc(sizeof(char*) * ARGS_MAX);
+int Spliter(char* string, char*** tmpv, int * tmp_argc){
+    char* string_copy = malloc(sizeof(char) * (strlen(string) + 1));
+    strcpy(string_copy, string);
+
+    char** tmp_argv = malloc(sizeof(char*) * ARGS_MAX);
     char* out;
     int cnt = 0;
+
     out = strtok(string_copy, " ");
-    tmp_argv[cnt] = malloc(sizeof(char) * strlen(out));
+    tmp_argv[cnt] = malloc(sizeof(char) * (strlen(out) + 1));
     strcpy(tmp_argv[cnt], out);
     cnt++;
 
     while (out){
         out = strtok(NULL, " ");
         if(out) {
-            tmp_argv[cnt] = malloc(sizeof(char) * strlen(out));
+            tmp_argv[cnt] = malloc(sizeof(char) * (strlen(out) + 1));
             strcpy(tmp_argv[cnt], out);
         }
         else {
-            tmp_argv = NULL;
+            tmp_argv[cnt] = NULL;
         }
         cnt ++;
     }
     
-    *tmp_argc = cnt;
+    *tmp_argc = cnt - 1;
+    *tmpv = tmp_argv;
     free(string_copy);
     return 0;
 }
 
 int RecognizeHisSym(char* string){
     if(string[0] == '!'){
-        if(strlen(string) == 3 && string[1] == '!'){
+        if(strlen(string) == 2 && string[1] == '!'){
             return 1;
         }
         char* endptr;
@@ -74,9 +77,11 @@ int AnalyzeCmd(){
     char* cmd_copy = malloc(sizeof(char) * len);
     strcpy(cmd_copy, cmd);
 
+    memset(argv, 0, ARGS_MAX * sizeof(char*));
+
     int cnt;
     char** tmp_argv;    //存直接对字符串切割的结果
-    Spliter(cmd_copy, tmp_argv, &cnt);
+    Spliter(cmd_copy, &tmp_argv, &cnt);
 
     argc = 0;
     for(int i = 0; i < cnt; i++){
@@ -98,7 +103,7 @@ int AnalyzeCmd(){
             }
             int his_argc;
             char** his_argv;
-            Spliter(his, his_argv, &his_argc);
+            Spliter(his, &his_argv, &his_argc);
             for (int j = 0; j < his_argc; j ++){
                 argv[argc] = his_argv[j];
                 argc ++;
@@ -116,16 +121,17 @@ int AnalyzeCmd(){
     return 0;
 }
 
-char* FormStdCmd(){
+char* FormStdCmd() {
     int len = CMD_SIZE;
     char* std_cmd = malloc(sizeof(char) * CMD_SIZE);
     std_cmd[0] = '\0';
     for(int i = 0; i < argc; i ++){
-        if(strlen(std_cmd) + strlen(argv[i]) >= len){
+        if(strlen(std_cmd) + strlen(argv[i] + 2) >= len){
             len = len * 2;
             std_cmd = realloc(std_cmd, len);
         }
-        strcat(std_cmd, argv[i]);    
+        strcat(std_cmd, argv[i]);
+        strcat(std_cmd, " ");
     }
     return std_cmd;
 }
