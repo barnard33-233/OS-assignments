@@ -46,7 +46,7 @@ int builtin_history(){
         char * p;
         int his_id = (int)strtol(argv[1], &p, 10); //his_id should be a natural number
         if((his_id <= 0) || (his_id > HISTORY_SIZE)){
-            printf("No such command in history");
+            printf("No such command in history\n");
             return -1;
         }
         int pos;
@@ -55,7 +55,7 @@ int builtin_history(){
             printf("%s\n", history[pos]);
             return 0;
         }
-        printf("No such command in history");
+        printf("No such command in history\n");
         return -1;
     }
     int cnt = 0;
@@ -68,7 +68,7 @@ int builtin_history(){
         }
     }
     while(cnt > 0){
-        printf("%d %s", cnt, buf[cnt - 1]);
+        printf("%d %s\n", cnt, buf[cnt - 1]);
         cnt --;
     }
     return 0;
