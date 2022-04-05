@@ -21,7 +21,7 @@ pid_t Createp(){
         return wait(NULL);
     }
     else{
-        perror("Error");
+        perror("Command execute error");
         return 0;
     }
     return 0;
@@ -35,7 +35,7 @@ int Command(){
         if(strcmp(name, builtin_name[i]) == 0){
             int (*builtin)(void) = builtin_func[i];
             if(builtin()){
-                perror("Error");
+                perror("Built in command execute error");
                 return -1;
             }
             run = 1;

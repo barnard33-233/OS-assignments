@@ -7,7 +7,7 @@ int RecognizeHisSym(char*);//识别历史记录算符，若是则返回查询的
 int GetCmd(){
     // memset(NULL, cmd, CMD_SIZE);
     if(fgets(cmd, CMD_SIZE, stdin) == NULL){
-        perror("Error");
+        perror("GetCmd error");
         return -1;
     }
     cmd[CMD_SIZE - 1] = '\0';
@@ -73,7 +73,7 @@ int RecognizeHisSym(char* string){
 
 // TODO：对于超出ARGS_MAX 的特判与错误返回
 int AnalyzeCmd(){
-    int len = strlen(cmd);
+    int len = strlen(cmd) + 1;
     char* cmd_copy = malloc(sizeof(char) * len);
     strcpy(cmd_copy, cmd);
 
@@ -91,7 +91,7 @@ int AnalyzeCmd(){
         if((his_id = RecognizeHisSym(tmp_argv[i])) > 0){
             char* his = GetHistory(his_id);
             if(his == NULL){
-                perror("Error");
+                perror("GetHistory");
 
                 free(cmd_copy);
                 for(int j = 0; j < cnt; j ++){

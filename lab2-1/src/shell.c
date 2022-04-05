@@ -25,12 +25,16 @@ int main(){
         }
 
         if(GetCmd()){
-            perror("Error");
+            perror("Get command error");
             continue;
         }
         // fprintf(stderr, "%s\n", cmd);//for test and debug
 
-        AnalyzeCmd();
+        if(AnalyzeCmd()){
+            perror("Analyze cmd error");
+            FreeArgv();
+            continue;
+        }
 
         if(!Command()){
             char* std_cmd = FormStdCmd();
@@ -50,7 +54,7 @@ int PrintPrompt(){
     user_name = getlogin();
     current_dir = getcwd(NULL, 0);
     if (!current_dir || !user_name){
-        perror("Error");
+        perror("prompt error");
         return -1;
     }
     printf("[%s %s]$ ", user_name, current_dir);

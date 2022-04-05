@@ -21,7 +21,7 @@ char* GetHistory(int num){
     char * his_cmd;
     size_t size = strlen(history[pos]) + 1;
     if(!(his_cmd = malloc(size * sizeof(char)))){
-        perror("Error");
+        perror("GetHistory malloc error");
         return NULL;
     }
     strcpy(his_cmd, history[pos]);
@@ -33,7 +33,7 @@ int SaveHistory(char* std_cmd){
     size_t size = strlen(std_cmd) + 1;
     new_cmd = malloc(size * sizeof(char));
     if(!new_cmd){
-        perror("Error");
+        perror("SaveHistory malloc error");
         return -1;
     }
     strcpy(new_cmd, std_cmd);
