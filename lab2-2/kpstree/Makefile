@@ -1,5 +1,5 @@
 CONFIG_MODULE_SIG = n #to solve 'signature and/or required key missing'
-obj-m += kptree.o
+obj-m += kpstree.o
 
 PWD := $(shell pwd)
 KDIR := /lib/modules/$(shell uname -r)/build
@@ -13,6 +13,6 @@ clean:
 
 test:
 	dmesg -c
-	insmod kptree.ko
-	rmmod kptree
+	insmod kpstree.ko
+	rmmod kpstree
 	dmesg > dmesg.file

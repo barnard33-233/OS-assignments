@@ -19,9 +19,9 @@ int init_module(){
 }
 
 void traverse(struct task_struct * task){
-    struct list_head node;
-    struct task_struct child;
-    list_for_each(node, task->children){
+    struct list_head * node;
+    struct task_struct * child;
+    list_for_each(node, &(task->children)){
         child = list_entry(node, struct task_struct, sibling);
         traverse(child);
         long state = child->state;
