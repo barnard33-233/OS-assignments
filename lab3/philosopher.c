@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define N 2
+#define N 3
 
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
