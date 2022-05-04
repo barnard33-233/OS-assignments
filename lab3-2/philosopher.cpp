@@ -25,14 +25,14 @@ DWORD WINAPI Tphilosopher(LPVOID idp){
             );
         }
         forks[left] = forks[right] = 1;
-        printf("get(%d, %d)", id, left);
-        printf("get(%d, %d)", id, right);
+        printf("got(%d, %d)\n", id, left);
+        printf("got(%d, %d)\n", id, right);
         ReleaseSRWLockExclusive(&lock);
 
         AcquireSRWLockExclusive(&lock);
         forks[left] = forks[right] = 0;
-        printf("release(%d, %d)", id, left);
-        printf("release(%d, %d)", id, right);
+        printf("release(%d, %d)\n", id, left);
+        printf("release(%d, %d)\n", id, right);
         WakeAllConditionVariable(&cond);
         ReleaseSRWLockExclusive(&lock);
     }
@@ -46,6 +46,7 @@ int main(){
     memset(forks, 0, sizeof(forks));
     HANDLE thread[N];
     int ids[N];
+    printf("%d\n", N);
     for (int i = 0; i < N; i ++){
         ids[i] = i;
         thread[i] = CreateThread(0, 0, Tphilosopher, &(ids[i]), 0, 0);
